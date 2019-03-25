@@ -1,0 +1,4 @@
+.build/
+build/
+
+chart/sysdig-agent-mp/charts/*

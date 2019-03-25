@@ -1,0 +1,100 @@
+applicationApiVersion: v1beta1
+
+properties:
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+  falco.serviceAccount.name:
+    title: Falco Service Account
+    description: Service account to assign to Falco DaemonSet
+    type: string
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+      serviceAccount:
+        roles:
+        - type: ClusterRole
+          rulesType: CUSTOM
+          rules:
+          - apiGroups:
+              - ""
+            resources:
+              - pods
+              - replicationcontrollers
+              - services
+              - events
+              - limitranges
+              - namespaces
+              - nodes
+              - resourcequotas
+            verbs:
+              - get
+              - list
+              - watch
+          - apiGroups:
+              - apps
+            resources:
+              - daemonsets
+              - deployments
+              - replicasets
+              - statefulsets
+            verbs:
+              - get
+              - list
+              - watch
+          - apiGroups:
+              - autoscaling
+            resources:
+              - horizontalpodautoscalers
+            verbs:
+              - get
+              - list
+              - watch
+          - apiGroups:
+              - batch
+            resources:
+              - cronjobs
+              - jobs
+            verbs:
+              - get
+              - list
+              - watch
+          - apiGroups:
+              - extensions
+            resources:
+              - daemonsets
+              - deployments
+              - ingresses
+              - replicasets
+            verbs:
+              - get
+              - list
+              - watch
+  image:
+    type: string
+    default: $REGISTRY/falco:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitToRegistryRepoTag:
+            registry: falco.image.registry
+            repo: falco.image.repository
+            tag: falco.image.tag
+  falco.ebpf.enabled:
+    title: Enable eBPF support for Falco
+    description: |-
+      Mark this checkbox if you are using a Kernel newer than 4.14. The default
+      value for newly created clusters is enabled, but if you are using an older
+      kernel, please uncheck this checkbox and use the Sysdig Kernel module for
+      capturing the system calls.
+    type: boolean
+    default: true
+required:
+- name
+- namespace
+- image
