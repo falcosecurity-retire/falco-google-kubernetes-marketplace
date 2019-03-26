@@ -2,20 +2,20 @@
 
 ## Overview
 
-Sysdig Platform it's the most powerful way to understand the data at the heart
-of your applications. Starting with a unique data source, we've built a
-platform that brings together many disparate operational requirements into a
-single, more effective way of securing and monitoring your cloud-native
-applications.
+Falco is an open source project for intrusion and abnormality detection for
+Cloud Native platforms such as Kubernetes, Mesosphere, and Cloud Foundry.
+Detect abnormal application behavior. Alert via Slack, Fluentd, NATS, and more.
+Protect your platform by taking action through serverless (FaaS) frameworks,
+or other automation.
 
-This marketplace application allows user to deploy Sysdig to you GKE instances,
+This marketplace application allows user to deploy Falco to you GKE instances,
 with configuration options for the most common scenarios. Actually it is one of
-the fastest way s to get started monitoring and securing your applications ran
-in top of Kubernetes.
+the fastest way s to get started to secure your Kubernetes platform and its
+applications.
 
 ## Installation
 
-The standard installation flow for Sysdig on GCP Marketplace is just to follow
+The standard installation flow for Falco on GCP Marketplace is just to follow
 the prompts and fill out the configuration options described below.
 
 ### Key Configuration Options
@@ -23,16 +23,4 @@ the prompts and fill out the configuration options described below.
 * **Name**: the name of your cluster deployment.
 * **Namespace**: the namespace where the Sysdig Agent is going to be deployed.
 * **Image**: the image of the Sysdig Agent. You can control its version from here.
-* **Sysdig Access Key**: the key provided from Sysdig for monitoring your infrastructure.
 * **eBPF support**: use eBPF instead of kernel module based architecture.
-
-### Hardware Allocation
-
-The default values for hardware requests are fairly low. Sysdig requests `100m`
-CPU and 512MB of memory and is capped to `200m` of CPU and 1024MB of memory.
-
-### Cluster Formation
-
-Once you have deployed Sysdig on GKE, a DaemonSet is created. This means that
-will be a Pod for each node in your cluster. This may take less than 5 minutes,
-and you can check its status on the Sysdig Monitor application.
