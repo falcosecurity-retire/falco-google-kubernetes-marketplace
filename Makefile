@@ -4,7 +4,7 @@ APP_DEPLOYER_IMAGE=$(REGISTRY)/falco/deployer:$(TAG)
 MINOR_TAG=$(shell echo $(TAG) | cut -d. -f1-2)
 APP_DEPLOYER_IMAGE_MINOR=$(REGISTRY)/falco/deployer:$(MINOR_TAG)
 
-FALCO_TAG=0.13.0
+FALCO_TAG=0.14.0
 
 include ./app.Makefile
 include ./crd.Makefile
