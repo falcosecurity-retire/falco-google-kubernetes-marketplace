@@ -19,7 +19,7 @@ APP_NAME ?= falco-testrun
 APP_PARAMETERS ?= { \
 	"name": "$(APP_NAME)", \
 	"namespace": "$(NAMESPACE)", \
-	"image": "docker.io/falcosecurity/falco:$(FALCO_TAG)" \
+	"image": "gcr.io/sysdig-monitor/falco:$(TAG)" \
 }
 
 app/build:: .build/falco \
