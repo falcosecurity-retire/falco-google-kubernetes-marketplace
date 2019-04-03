@@ -13,7 +13,7 @@ metadata:
 spec:
   descriptor:
     type: Falco
-    version: '0.13.0'
+    version: '0.14.0'
     description: |-
       [Falco](https://falco.org) is a behavioral activity monitor designed to detect anomalous activity in your applications. Powered by sysdig’s system call capture infrastructure, Falco lets you continuously monitor and detect container, application, host, and network activity... all in one place, from one source of data, with one set of rules.
 
