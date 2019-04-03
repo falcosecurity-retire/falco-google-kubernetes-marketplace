@@ -24,6 +24,17 @@ spec:
       * Unexpected read of a sensitive file (like /etc/shadow)
       * A non-device file is written to /dev
       * A standard system binary (like ls) makes an outbound network connection
+
+      # Checking alerts
+
+      You can configure Falco to allow integrations with other services editing
+      its ConfigMap, but meanwhile you can check the alert occurrence using the
+      logs. In the STDOUT, an alert looks like:
+
+      ```
+      10:58:57.672621814: Notice A shell was spawned in a container with an attached terminal (user=root k8s.ns=default k8s.pod=falco-testrun-gtkzg container=191c8e000ec6 shell=bash parent=<NA> cmdline=bash terminal=34816)
+      10:59:06.781661754: Error File below a known binary directory opened for writing (user=root command=touch /bin/foo file=/bin/foo parent=bash pcmdline=bash gparent=<NA>) k8s.ns=default k8s.pod=falco-testrun-gtkzg container=191c8e000ec6
+      ```
     maintainers:
     - name: Sysdig, Inc.
       url: https://sysdig.com
@@ -40,6 +51,27 @@ spec:
     notes: |-
       Once you have deployed Falco to your platform, you can check its logs to
       ensure that is up and running.
+
+      When you see something like:
+
+      ```
+      * Setting up /usr/src links from host
+      ls: cannot access '/host/usr/src': No such file or directory
+      * Mounting debugfs
+      Found kernel config at /proc/config.gz
+      * COS detected (build 10895.138.0), downloading and setting up kernel headers
+      * Downloading https://storage.googleapis.com/cos-tools/10895.138.0/kernel-src.tar.gz
+      * Extracting kernel sources
+      * Configuring kernel
+      * Trying to compile BPF probe falco-probe-bpf (falco-probe-bpf-0.14.0-x86_64-4.14.91+-84a0041881754ed56251f11cab699791.o)
+      * BPF probe located, it's now possible to start sysdig
+      Wed Apr  3 10:46:15 2019: Falco initialized with configuration file /etc/falco/falco.yaml
+      Wed Apr  3 10:46:15 2019: Loading rules from file /etc/falco/falco_rules.yaml:
+      Wed Apr  3 10:46:17 2019: Loading rules from file /etc/falco/falco_rules.local.yaml:
+      ```
+
+      That means that Falco is ready, watching your Kubernetes cluster to find
+      weird behaviors.
 
       # Adding more options to Falco
 
