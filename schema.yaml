@@ -40,6 +40,59 @@ properties:
       capturing the system calls.
     type: boolean
     default: true
+
+  falco.integrations.pubsubOutput.enabled:
+    title: Enable Pub/Sub output for Falco
+    description: |-
+      When enabled, it makes Falco to use a Google Pub/Sub topic to send alerts.
+    type: boolean
+    default: false
+  falco.integrations.pubsubOutput.projectID:
+    title: Project where Pub/Sub topic is deployed
+    description: |-
+      The project identifier where the Google Pub/Sub topic is deployed.
+    type: string
+    default: ""
+  falco.integrations.pubsubOutput.topic:
+    title: Pub/Sub topic where Falco is going to send alerts
+    description: |-
+      The name of the Google Pub/Sub topic name where Falco is going to send alerts.
+    type: string
+    default: falco-alerts
+  falco.integrations.pubsubOutput.credentialsData:
+    title: Service Account credentials used to publish alerts from Falco to a Pub/Sub topic
+    description: |-
+      To be able to send Falco alerts to a Google Pub/Sub topic, we need to be
+      authenticated. This field is used to store the content of the service account
+      JSON file. It can be encoded using base64 instead of messing with JSON format.
+    type: string
+    default: ""
+    x-google-marketplace:
+      type: STRING
+
+  falco.integrations.gcscc.enabled:
+    title: Enable Google Cloud Security Command Center integration
+    description: |-
+      When enabled, it makes Falco to send alerts and transform it to findings in
+      Google Cloud Security Control Center.
+    type: boolean
+    default: false
+  falco.integrations.gcscc.webhookUrl:
+    title: Endpoint where Sysdig Connector is deployed
+    description: |-
+      This integration requires a Sysdig connector for Google Cloud Security
+      Command Center deployed. This webhook is going to be responsible of receiving
+      Falco alerts and transform it to findings.
+    type: string
+    default: http://sysdig-gcscc-connector.default.svc.cluster.local:8080/events
+  falco.integrations.gcscc.webhookAuthenticationToken:
+    title: Authentication Token for the Sysdig Connector webhook
+    description: |-
+      To avoid to receive not allowed requests, we need to use the same authentication
+      token in both sides. We need to send the authentication header to the Sysdig Connector
+      and it will check it against its token.
+    type: string
+    default: b27511f86e911f20b9e0f9c8104b4ec4
 required:
 - name
 - namespace

@@ -24,3 +24,32 @@ the prompts and fill out the configuration options described below.
 * **Namespace**: the namespace where the Sysdig Agent is going to be deployed.
 * **Image**: the image of the Sysdig Agent. You can control its version from here.
 * **eBPF support**: use eBPF instead of kernel module based architecture.
+
+### Google Pub/Sub Integration configuration options
+
+In addition to key configuration options, we also support several integrations
+we built with Google ecosystem. One of them is the ability to send Falco
+alerts directly to a Google Pub/Sub topic.
+
+You will need to configure.
+
+* **Enable Pub/Sub integration**: enable or disable the Google Pub/Sub integration.
+* **Project ID**: the project identifier where Google Pub/Sub topic is deployed.
+* **Topic**: the topic name which is going to receive Falco alerts.
+* **Credentials**: the credentials required to send messages to the topic. It
+  can be a base64 encoding string instead of messing with the JSON format.
+
+### Google Cloud Security Command Center Integration configuration options
+
+Like previous topic, we also built an integration to send and transform Falco
+alerts to findings in the Google Cloud Security Command Center.
+
+To enable this integration, you will need a [Sysdig Connector](https://github.com/draios/sysdig-gcscc-connector/)
+instance deployed in an accesible place (it may be this cluster) and you will
+need to configure:
+
+* **Enable Google Cloud Security Control Center integration**: enable or disable
+  the Google Cloud Security Control Center integration.
+* **Webhook URL**: the url where the Sysdig Connector is listening.
+* **Authentication Token**: the same authentication token you used to deploy
+  the Sysdig Connector.
